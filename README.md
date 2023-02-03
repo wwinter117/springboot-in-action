@@ -1,4 +1,5 @@
-[![张冬冬/springboot-in-action](https://gitee.com/wwinter117/springboot-in-action/widgets/widget_card.svg?colors=ffffff,1e252b,323d47,455059,d7deea,99a0ae)](https://gitee.com/wwinter117/springboot-in-action)
+[![star](https://gitee.com/wwinter117/springboot-in-action/badge/star.svg?theme=dark)](https://gitee.com/wwinter117/springboot-in-action/stargazers)
+[![fork](https://gitee.com/wwinter117/springboot-in-action/badge/fork.svg?theme=dark)](https://gitee.com/wwinter117/springboot-in-action/members)
 
 # SpringBoot In Action
 基于SpringBoot的各种技术实战
