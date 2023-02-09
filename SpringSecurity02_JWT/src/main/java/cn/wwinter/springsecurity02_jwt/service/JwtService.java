@@ -52,10 +52,10 @@ public class JwtService {
      *  获得SigningKey
      */
     private Key getSignInKey() {
-        // 对我们的密钥进行解码
+        // 进行解码
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
 
-        // 使用hmacShaKeyFor登录算法
+        // 解码后生成的字节数组使用hmacShaKeyFor登录算法生成密钥，返回
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
