@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @CreateTime: 2023-02-07
  */
 @RestController
-@RequestMapping("/demo/api")
+@RequestMapping("/api/v1/demo")
 public class DemoController {
 
     @GetMapping("hello")

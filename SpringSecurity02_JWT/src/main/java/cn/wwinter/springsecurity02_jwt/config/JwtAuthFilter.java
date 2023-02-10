@@ -1,6 +1,7 @@
 package cn.wwinter.springsecurity02_jwt.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +18,6 @@ import java.io.IOException;
 
 /**
  * 过滤器，用于检查请求中是否包含JWT token
- *
  * @Author: zhangdongdong
  * @CreateTime: 2023-02-07
  */
@@ -25,8 +25,11 @@ import java.io.IOException;
 @RequiredArgsConstructor // 用于生成包含 final 和 @NonNull 注解的成员变量的构造方法
 public class JwtAuthFilter extends OncePerRequestFilter {
 
+    @Autowired
     private JwtService jwtService;
+    @Autowired
     private UserDetailsService userDetailsService;
+
     /**
      * 过滤请求
      * @param: [request, response, filterChain]

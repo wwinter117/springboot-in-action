@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -46,7 +47,7 @@ public class JwtService {
     }
 
     /**
-     * 生成token
+     * 生成token（根据claim和user）
      */
     public String generateToken(Map<String, Object> extractClaims, UserDetails userDetails) {
         return Jwts
@@ -57,6 +58,13 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(SignatureAlgorithm.HS256, getSignInKey())
                 .compact();
+    }
+
+    /**
+     * 生成token（根据user）
+     */
+    public String generateToken(UserDetails userDetails) {
+        return generateToken(new HashMap<>(), userDetails);
     }
 
     /**
@@ -91,6 +99,4 @@ public class JwtService {
         // 解码后生成的字节数组使用hmacShaKeyFor登录算法生成密钥，返回
         return Keys.hmacShaKeyFor(keyBytes);
     }
-
-
 }
