@@ -1,7 +1,11 @@
 package cn.wwinter.springsecurity02_jwt.config;
 
-import cn.wwinter.springsecurity02_jwt.service.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -22,9 +26,9 @@ import java.io.IOException;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private JwtService jwtService;
-
+    private UserDetailsService userDetailsService;
     /**
-     *
+     * 过滤请求
      * @param: [request, response, filterChain]
      * @return: void
      **/
@@ -46,13 +50,27 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        // 标头中有Jwt，提取出来（从"Bearer"之后开始）
+        // 标头中有Jwt，提取出来（从"Bearer "之后开始）
         jwt = authHeader.substring(7);
 
-        // TODO: 从JWT中提取出userEmail
+        // 从JWT中提取出userEmail
         userEmail = jwtService.extractUsername(jwt);
 
-        
+        // 开始验证流程（userEmail非空，且此前未经过验证）
+        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+            if (jwtService.isTokenValid(jwt, userDetails)) {
+                // 更新context
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
+        }
+
+        // 验证通过
+        filterChain.doFilter(request, response);
+
     }
     
     

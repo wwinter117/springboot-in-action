@@ -1,4 +1,4 @@
-package cn.wwinter.springsecurity02_jwt.service;
+package cn.wwinter.springsecurity02_jwt.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
