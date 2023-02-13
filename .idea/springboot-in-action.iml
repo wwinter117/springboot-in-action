@@ -5,7 +5,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="tools" level="project" />
-    <orderEntry type="library" name="tools1" level="project" />
+    <orderEntry type="library" name="servlet-api" level="project" />
   </component>
 </module>

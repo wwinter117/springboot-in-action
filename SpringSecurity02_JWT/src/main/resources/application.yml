@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/jwt_security?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
-    password: 123456
+    password: 12345678
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
@@ -13,4 +13,5 @@ spring:
         format_sql: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL57Dialect
-
+server:
+  port: 8011

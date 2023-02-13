@@ -6,15 +6,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SpringSecurity02_JWT" />
+        <module name="SpringBoot3-Example" />
         <module name="SpringSecurity01" />
+        <module name="SpringSecurity02_JWT" />
         <module name="springboot" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SpringSecurity02_JWT2" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SpringBoot3-Example" options="-parameters" />
       <module name="SpringSecurity02_JWT" options="-parameters" />
+      <module name="SpringSecurity02_JWT2" options="-parameters" />
     </option>
   </component>
 </project>

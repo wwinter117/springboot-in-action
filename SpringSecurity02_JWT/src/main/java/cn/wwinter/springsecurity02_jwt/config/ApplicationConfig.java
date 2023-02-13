@@ -1,11 +1,11 @@
 package cn.wwinter.springsecurity02_jwt.config;
 
 import cn.wwinter.springsecurity02_jwt.user.UserRepository;
-import com.mysql.cj.protocol.AuthenticationProvider;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,9 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @Date 2023/2/10
  */
 @Configuration
-@RequiredArgsConstructor
 public class ApplicationConfig {
 
+    @Autowired
     private UserRepository repository;
 
     /**
@@ -29,18 +29,18 @@ public class ApplicationConfig {
      */
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> repository.findByEmail(username)
-                .orElseThrow(()->new UsernameNotFoundException("user not found"));
+        return username -> repository.findByEmail(username);
     }
 
     /**
      * 注册一个AuthenticationProvider
      */
+    @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
-        return (AuthenticationProvider) authProvider;
+        return authProvider;
     }
 
     /**

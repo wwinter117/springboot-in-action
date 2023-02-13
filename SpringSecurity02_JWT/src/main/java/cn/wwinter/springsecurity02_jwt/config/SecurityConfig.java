@@ -1,6 +1,6 @@
 package cn.wwinter.springsecurity02_jwt.config;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -17,11 +17,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  */
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtAuthFilter jwtAuthfilter;
-    private final AuthenticationProvider authenticationProvider;
+    @Autowired
+    private  JwtAuthFilter jwtAuthfilter;
+    @Autowired
+    private  AuthenticationProvider authenticationProvider;
 
 
     @Bean
@@ -29,7 +30,7 @@ public class SecurityConfig {
         http.csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .antMatchers("/api/v1/auth/**")
+                .requestMatchers("/api/v1/auth/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
